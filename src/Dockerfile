@@ -4,14 +4,14 @@ FROM node:18
 # Set working directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json (if available) from the parent directory
-COPY ./RearcApp_Project/package*.json ./
+# Copy package.json and package-lock.json (if available) from the src directory
+COPY src/package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the rest of the application code from the src directory
-COPY . .
+COPY src/ .
 
 # Expose port
 EXPOSE 3000
