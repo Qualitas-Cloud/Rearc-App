@@ -5,7 +5,7 @@ FROM node:18
 WORKDIR /RearcApp_Project/src
 
 # Copy package.json and install dependencies
-COPY COPY RearcApp_Project/package*.json ./
+COPY RearcApp_Project/package*.json ./
 
 RUN npm install
 
