@@ -2,19 +2,20 @@
 FROM node:18
 
 # Set working directory
-WORKDIR /RearcApp_Project/src
+WORKDIR /usr/src/app
 
-# Copy package.json and install dependencies
+# Copy package.json and package-lock.json (if available) from RearcApp_Project
 COPY RearcApp_Project/package*.json ./
 
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
-COPY . .
+# Copy the rest of the application code and files
+COPY src/ .
 
 # Expose port
 EXPOSE 3000
 
 # Command to run the app
-CMD [ "node", "index.js" ]
+CMD [ "node", "000.js" ]
 
