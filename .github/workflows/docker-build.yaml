@@ -16,5 +16,30 @@ jobs:
     - name: Build the Docker image
       run: docker build -f src/Dockerfile -t my-image-name:latest .
 
+    - name: Download Trivy
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: my-image-name:latest
+        format: 'table'
+        exit-code: '0'  # Set exit code to 0 to ignore vulnerabilities and continue
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'HIGH,CRITICAL'
+      continue-on-error: true  # Continue even if Trivy finds vulnerabilities
 
-    
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1  # Change this to your preferred AWS region
+
+    - name: Log in to Amazon ECR Public
+      run: |
+        aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/your-account-id
+
+    - name: Tag the Docker image
+      run: docker tag my-image-name:latest public.ecr.aws/your-account-id/reac_app:latest
+
+    - name: Push the Docker image to Amazon ECR Public
+      run: docker push public.ecr.aws/your-account-id/reac_app:latest
