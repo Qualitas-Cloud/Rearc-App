@@ -2,10 +2,10 @@
 FROM node:18
 
 # Set working directory
-WORKDIR /Rearc App_Project/src
+WORKDIR /RearcApp_Project/src
 
 # Copy package.json and install dependencies
-COPY COPY Rearc\ App_Project/package*.json ./
+COPY COPY RearcApp_Project/package*.json ./
 
 RUN npm install
 
