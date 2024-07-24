@@ -5,7 +5,7 @@ FROM node:18
 WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json (if available) from the parent directory
-COPY ../RearcApp_Project/package*.json ./
+COPY ./RearcApp_Project/package*.json ./
 
 # Install dependencies
 RUN npm install
