@@ -2,7 +2,7 @@
 FROM node:18
 
 # Set working directory
-WORKDIR /usr/src/appp
+WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json (if available) from the src directory
 COPY src/package*.json ./
