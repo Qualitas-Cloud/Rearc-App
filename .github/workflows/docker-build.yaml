@@ -14,7 +14,8 @@ jobs:
       uses: docker/setup-buildx-action@v2
 
     - name: Build the Docker image
-      run: docker build -f src/Dockerfile -t my-image-name:latest src/
+      run: docker build -f src/Dockerfile -t my-image-name:latest .
+
 
     - name: Download Trivy
       uses: aquasecurity/trivy-action@master
