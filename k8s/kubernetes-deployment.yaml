@@ -14,7 +14,7 @@ spec:
       labels:
         app: reac-app
     spec:
-      containers:
+    containers:
       - name: reac-app-container
         image: 381492230049.dkr.ecr.us-east-1.amazonaws.com/reac_app:latest  # Private ECR image URL
         ports:
