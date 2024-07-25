@@ -49,10 +49,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up kubectl
-      uses: aws-actions/setup-kubectl@v2
-      with:
-        version: '1.29.6'  # Specify the version of kubectl you need
+    - name: Install kubectl
+      run: |
+        curl -LO "https://s3.us-west-2.amazonaws.com/amazon-eks/1.29.6/2024-07-12/bin/linux/amd64/kubectl"
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
 
     - name: Configure AWS CLI
       uses: aws-actions/configure-aws-credentials@v2
