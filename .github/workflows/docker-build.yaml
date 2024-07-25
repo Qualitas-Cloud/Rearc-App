@@ -49,9 +49,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Remove existing kubectl if present
+      run: sudo rm -f /usr/local/bin/kubectl
+
     - name: Install kubectl
       run: |
-        curl -LO "https://s3.us-west-2.amazonaws.com/amazon-eks/1.29.6/2024-07-12/bin/linux/amd64/kubectl"
+        curl -LO "https://s3.us-east-1.amazonaws.com/amazon-eks/1.29.6/2024-07-12/bin/linux/amd64/kubectl"
         chmod +x ./kubectl
         sudo mv ./kubectl /usr/local/bin/kubectl
 
