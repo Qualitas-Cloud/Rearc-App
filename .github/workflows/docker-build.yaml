@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI/CD
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1  # Change this to your preferred AWS region
+        aws-region: us-east-1
 
     - name: Log in to Amazon ECR
       run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 381492230049.dkr.ecr.us-east-1.amazonaws.com
@@ -42,3 +42,29 @@ jobs:
 
     - name: Push the Docker image to Amazon ECR
       run: docker push 381492230049.dkr.ecr.us-east-1.amazonaws.com/reac_app:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up kubectl
+      uses: aws-actions/setup-kubectl@v2
+      with:
+        version: '1.29.6'  # Specify the version of kubectl you need
+
+    - name: Configure AWS CLI
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Update kubeconfig
+      run: aws eks update-kubeconfig --region us-east-1 --name rearc-eks-RqI3ClxA
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl apply -f k8s/kubernetes-deployment.yaml
+        kubectl apply -f k8s/service.yaml

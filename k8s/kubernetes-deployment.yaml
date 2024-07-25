@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reac-app-deployment
+  labels:
+    app: reac-app
+spec:
+  replicas: 3  # Number of desired replicas
+  selector:
+    matchLabels:
+      app: reac-app
+  template:
+    metadata:
+      labels:
+        app: reac-app
+    spec:
+      containers:
+      - name: reac-app-container
+        image: 381492230049.dkr.ecr.us-east-1.amazonaws.com/reac_app:latest  # Private ECR image URL
+        ports:
+        - containerPort: 80
+        env:
+        - name: SECRET_WORD
+          valueFrom:
+            secretKeyRef:
+              name: secret-word
+              key: SECRET_WORD
