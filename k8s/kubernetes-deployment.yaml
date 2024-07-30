@@ -16,7 +16,7 @@ spec:
     spec:
     containers:
       - name: reac-app-container
-        image: 381492230049.dkr.ecr.us-east-1.amazonaws.com/reac_app:latest  # Private ECR image URL
+        image: public.ecr.aws/q4e4w1b3/reac_app:latest  # Public ECR image URL
         ports:
         - containerPort: 80
         env:
