@@ -14,15 +14,15 @@ spec:
       labels:
         app: reac-app
     spec:
-    containers:
-      - name: reac-app-container
-        image: public.ecr.aws/q4e4w1b3/reac_app:latest  # Public ECR image URL
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-        env:
-        - name: SECRET_WORD
-          valueFrom:
-            secretKeyRef:
-              name: secret-word
-              key: SECRET_WORD
+      containers:
+        - name: reac-app-container
+          image: public.ecr.aws/q4e4w1b3/reac_app:latest  # Public ECR image URL
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: SECRET_WORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-word
+                  key: SECRET_WORD
