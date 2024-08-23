@@ -63,10 +63,10 @@ jobs:
       run: aws eks update-kubeconfig --region us-east-1 --name pocproject_cluster
 
     - name: Update image in Kubernetes manifest
-      run: "sed -i 's|image:.*|image: 381492230049.dkr.ecr.us-east-1.amazonaws.com/pocproject/reacapp:latest|' k8s/kubernetes-deployment.yaml"
+      run: |
+        sed -i 's|image:.*|image: 381492230049.dkr.ecr.us-east-1.amazonaws.com/pocproject/reacapp:latest|' k8s/kubernetes-deployment.yaml
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl apply --validate=false -f k8s/kubernetes-deployment.yaml
-        kubectl apply --validate=false -f k8s/service.yaml
-
+        kubectl apply -f k8s/kubernetes-deployment.yaml
+        kubectl apply -f k8s/service.yaml
