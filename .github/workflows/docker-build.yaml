@@ -34,14 +34,14 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Log in to Amazon ECR Public
-      run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+    - name: Log in to Amazon ECR
+      run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 381492230049.dkr.ecr.us-east-1.amazonaws.com
 
     - name: Tag the Docker image
-      run: docker tag my-image-name:latest public.ecr.aws/q4e4w1b3/reac_app:latest
+      run: docker tag my-image-name:latest 381492230049.dkr.ecr.us-east-1.amazonaws.com/pocproject/reacapp:latest
 
-    - name: Push the Docker image to Amazon ECR Public
-      run: docker push public.ecr.aws/q4e4w1b3/reac_app:latest
+    - name: Push the Docker image to Amazon ECR
+      run: docker push 381492230049.dkr.ecr.us-east-1.amazonaws.com/pocproject/reacapp:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -60,7 +60,10 @@ jobs:
         aws-region: us-east-1
 
     - name: Update kubeconfig
-      run: aws eks update-kubeconfig --region us-east-1 --name rearc-eks-ZfmixeRF
+      run: aws eks update-kubeconfig --region us-east-1 --name pocproject_cluster
+
+    - name: Update image in Kubernetes manifest
+      run: "sed -i 's|image:.*|image: 381492230049.dkr.ecr.us-east-1.amazonaws.com/pocproject/reacapp:latest|' k8s/kubernetes-deployment.yaml"
 
     - name: Deploy to Kubernetes
       run: |
