@@ -1,17 +1,16 @@
-# Use an official Node.js runtime as the base image
 FROM node:14
 
 # Set the working directory inside the container
-WORKDIR /ReacApp_Project
+WORKDIR /app
 
-# Copy the package.json from the parent directory to the working directory
-COPY ../package.json ./
+# Copy the package.json to the working directory
+COPY package.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy the application code from the src directory to the working directory
-COPY . ./src/
+COPY src/ ./src/
 
 # Expose port (if your app runs on a specific port, change it accordingly)
 EXPOSE 3000
