@@ -4,7 +4,7 @@ FROM node:14
 # Set the working directory inside the container
 WORKDIR /ReacApp_Project
 
-# Copy the package.json to the working directory
+# Copy the package.json from the parent directory to the working directory
 COPY ../package.json ./
 
 # Install dependencies
