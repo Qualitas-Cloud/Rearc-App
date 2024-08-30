@@ -15,7 +15,7 @@ spec:
         app: reacapp
     spec:
       containers:
-        - name: pocproject/reacapp
+        - name: reacapp-container  # Corrected container name
           image: 381492230049.dkr.ecr.us-east-1.amazonaws.com/pocproject/reacapp:latest  # Public ECR image URL
           imagePullPolicy: Always
           ports:
