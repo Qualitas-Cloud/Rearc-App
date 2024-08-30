@@ -1,7 +1,7 @@
 FROM node:14
 
 # Set the working directory inside the container
-WORKDIR /ReacApp_Project
+WORKDIR /RearcApp_Project
 
 # Copy the package.json to the working directory
 COPY package.json ./
