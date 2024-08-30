@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reac-app-deployment
+  name: reacapp
   labels:
-    app: reac-app
+    app: reacapp
 spec:
   replicas: 3  # Number of desired replicas
   selector:
     matchLabels:
-      app: reac-app
+      app: reacapp
   template:
     metadata:
       labels:
-        app: reac-app
+        app: reacapp
     spec:
       containers:
         - name: pocproject/reacapp
