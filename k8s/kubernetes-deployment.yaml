@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reacapp
+  name: rearcapp
   labels:
-    app: reacapp
+    app: rearcapp
 spec:
   replicas: 3  # Number of desired replicas
   selector:
     matchLabels:
-      app: reacapp
+      app: rearcapp
   template:
     metadata:
       labels:
-        app: reacapp
+        app: rearcapp
     spec:
       containers:
         - name: reacapp-container  # Corrected container name

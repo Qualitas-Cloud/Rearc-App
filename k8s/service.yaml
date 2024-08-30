@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: reacservice
+  name: rearcservice
   labels:
-    app: reacapp
+    app: rearcapp
 spec:
   type: LoadBalancer
   selector:
-    app: reacapp
+    app: rearcapp
   ports:
     - protocol: TCP
       port: 80
