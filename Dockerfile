@@ -16,4 +16,4 @@ COPY src/ ./src/
 EXPOSE 3000
 
 # Define the command to run your app
-CMD ["node", "../src/OOO.js"]
+CMD ["node", "src/000.js"]
